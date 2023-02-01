@@ -1,6 +1,7 @@
 package utils;
 
 import com.codeborne.selenide.WebDriverRunner;
+import data.ComponentVO;
 import data.HardCodeData;
 import data.PriceVO;
 import data.Storage;
@@ -23,12 +24,12 @@ public class PricesParser {
         RecipeLoader.load();
     }
 
-    public List<PriceVO> getPrices(List<String> names, int minCount, int maxPrice) {
+    public List<PriceVO> getPrices(List<ComponentVO> components, int minCount, int maxPrice) {
         List<PriceVO> output = new ArrayList<>();
-        Storage.currentProgressTotal = names.size();
+        Storage.currentProgressTotal = components.size();
         Storage.currentProgress = 0;
-        for (String name : names) {
-            String url = URLBuilder.buildTTCSearchURL(name, minCount, maxPrice);
+        for (ComponentVO component : components) {
+            String url = URLBuilder.buildTTCSearchURL(component.getName(), minCount, maxPrice);
             SearchPage page = new SearchPage(url);
             List<PriceVO> prices = page.getPrices();
             output.addAll(prices);

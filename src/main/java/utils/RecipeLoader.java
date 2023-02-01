@@ -1,5 +1,6 @@
 package utils;
 
+import data.ComponentVO;
 import data.RecipeVO;
 import data.Storage;
 
@@ -10,19 +11,27 @@ import java.util.Scanner;
 
 public class RecipeLoader {
     public static void load() {
-        List<String> uniqueComponents = new ArrayList<>();
+        List<ComponentVO> uniqueComponents = new ArrayList<>();
         List<RecipeVO> recipes = new ArrayList<>();
         try (Scanner scanner = new Scanner(Objects.requireNonNull(RecipeLoader.class.getClassLoader().getResourceAsStream("recipes.csv")))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] separated = line.split(",");
-                List<String> components = new ArrayList<>();
-                for (int i = 1; i < separated.length; i += 1) {
+                List<ComponentVO> components = new ArrayList<>();
+                for (int i = 1; i < separated.length; i += 2) {
                     String componentName = separated[i];
-                    if (!uniqueComponents.contains(componentName)) {
-                        uniqueComponents.add(componentName);
+                    String componentRussianName = separated[i + 1];
+                    ComponentVO component = new ComponentVO(componentName, componentRussianName);
+                    boolean flag = true;
+                    for (int j = 0; j < uniqueComponents.size(); j += 1) {
+                        if (uniqueComponents.get(j).getName() == componentName) {
+                            flag = false;
+                        }
                     }
-                    components.add(componentName);
+                    if (flag) {
+                        uniqueComponents.add(component);
+                    }
+                    components.add(component);
                 }
                 RecipeVO recipe = new RecipeVO(separated[0], components);
                 recipes.add(recipe);

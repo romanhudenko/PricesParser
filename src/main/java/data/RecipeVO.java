@@ -7,5 +7,5 @@ import java.util.List;
 @Value
 public class RecipeVO {
     public String name;
-    public List<String> components;
+    public List<ComponentVO> components;
 }
