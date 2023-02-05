@@ -42,7 +42,7 @@ public class PricesParser {
     @Async
     public void endlessLoad() {
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--proxy-server=socks5://127.0.0.1:1080");
+        chromeOptions.addArguments("--proxy-server=socks5://127.0.0.1:1081");
         chromeOptions.addArguments("--headless");
         WebDriver driver = new ChromeDriver(chromeOptions);
         WebDriverRunner.setWebDriver(driver);

@@ -24,7 +24,7 @@ public class RecipeLoader {
                     ComponentVO component = new ComponentVO(componentName, componentRussianName);
                     boolean flag = true;
                     for (int j = 0; j < uniqueComponents.size(); j += 1) {
-                        if (uniqueComponents.get(j).getName() == componentName) {
+                        if (uniqueComponents.get(j).getName().equals(componentName)) {
                             flag = false;
                         }
                     }
