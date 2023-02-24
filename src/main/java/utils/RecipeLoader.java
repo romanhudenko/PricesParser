@@ -4,16 +4,17 @@ import data.ComponentVO;
 import data.RecipeVO;
 import data.Storage;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
 public class RecipeLoader {
-    public static void load() {
+    public static void load(InputStream stream) {
         List<ComponentVO> uniqueComponents = new ArrayList<>();
         List<RecipeVO> recipes = new ArrayList<>();
-        try (Scanner scanner = new Scanner(Objects.requireNonNull(RecipeLoader.class.getClassLoader().getResourceAsStream("recipes.csv")))) {
+        try (Scanner scanner = new Scanner(Objects.requireNonNull(stream))) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 String[] separated = line.split(",");

@@ -28,7 +28,7 @@ public class SearchPage {
         for (SelenideElement node : rows) {
             String itemName = node.$("td[data-bind=\"using: TradeAsset.Item\"] div").getText();
             String time = node.$("td.bold.hidden-xs").getText();
-            double price = Double.parseDouble(node.$("span[data-bind=\"localizedNumber: UnitPrice\"]").getText().replace(",", "."));
+            double price = Double.parseDouble(node.$("span[data-bind=\"localizedNumber: UnitPrice\"]").getText().replace(",", ".").replace(" ", ""));
             String guild = node.$("div[data-bind=\"text: GuildName\"]").getText();
             String place = node.$("div[data-bind=\"text: StringResource['TraderLocation' + DBData.GuildKioskLocation[GuildKioskLocationID]]\"]").getText();
             output.add(new PriceVO(itemName, price, place, guild, time));

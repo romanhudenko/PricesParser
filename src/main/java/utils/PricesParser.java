@@ -21,7 +21,7 @@ import static com.codeborne.selenide.Selenide.sleep;
 @Service
 public class PricesParser {
     public PricesParser() {
-        RecipeLoader.load();
+        RecipeLoader.load(RecipeLoader.class.getClassLoader().getResourceAsStream("recipes.csv"));
     }
 
     public List<PriceVO> getPrices(List<ComponentVO> components, int minCount, int maxPrice) {
